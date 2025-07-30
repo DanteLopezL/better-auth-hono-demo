@@ -8,7 +8,7 @@ import { userRouter } from "./routes/user";
 import { logger } from "hono/logger";
 
 //Main Hono instance
-const app = new Hono<AuthContext>().basePath("/api");
+const app = new Hono<AuthContext>().basePath("/api/auth");
 
 //Middleware
 app.use(logger());
@@ -18,7 +18,7 @@ app.use("*", sessionMiddleware);
 //Routes
 app.route("/healthcheck", healthRouter);
 app.route("/user", userRouter);
-app.route("/auth", authRouter);
+app.route("", authRouter);
 
 // Fallback route
 app.notFound((c) => {
