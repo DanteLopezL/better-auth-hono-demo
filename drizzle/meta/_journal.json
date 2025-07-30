@@ -1,0 +1,27 @@
+{
+  "version": "7",
+  "dialect": "postgresql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "7",
+      "when": 1753672262442,
+      "tag": "0000_stiff_terrax",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1753672468376,
+      "tag": "0001_perpetual_umar",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1753679051462,
+      "tag": "0002_happy_quasar",
+      "breakpoints": true
+    }
+  ]
+}
