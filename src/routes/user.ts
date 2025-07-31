@@ -4,18 +4,9 @@ import { AuthContext } from "../interfaces/context";
 
 export const userRouter = new Hono<AuthContext>();
 
-userRouter.get("/session", requireAuthMiddleware, (c) => {
-  const session = c.get("session");
-  const user = c.get("user");
-
-  return c.json({
-    session,
-    user,
+userRouter.get("/me", requireAuthMiddleware, (c) => {
+  const user = c.get("user")!;
+  return new Response(JSON.stringify(user), {
+    headers: { "Content-Type": "application/json" },
   });
-});
-
-// User profile endpoint
-userRouter.get("/profile", requireAuthMiddleware, (c) => {
-  const user = c.get("user");
-  return c.json({ profile: user });
 });
