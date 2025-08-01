@@ -14,6 +14,7 @@ export const users = pgTable("users", {
   updatedAt: timestamp("updated_at")
     .$defaultFn(() => new Date())
     .notNull(),
+  username: text("username"),
 });
 
 export const sessions = pgTable("sessions", {
@@ -54,4 +55,11 @@ export const verifications = pgTable("verifications", {
   expiresAt: timestamp("expires_at").notNull(),
   createdAt: timestamp("created_at").$defaultFn(() => new Date()),
   updatedAt: timestamp("updated_at").$defaultFn(() => new Date()),
+});
+
+export const jwkss = pgTable("jwkss", {
+  id: text("id").primaryKey(),
+  publicKey: text("public_key").notNull(),
+  privateKey: text("private_key").notNull(),
+  createdAt: timestamp("created_at").notNull(),
 });
