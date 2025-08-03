@@ -1,6 +1,6 @@
-import type { Context, Next } from "hono";
+import { createMiddleware } from "hono/factory";
 
-export const requireAuthMiddleware = async (c: Context, next: Next) => {
+export const requireAuthMiddleware = createMiddleware(async (c, next) => {
   const user = c.get("user");
   const session = c.get("session");
 
@@ -8,5 +8,5 @@ export const requireAuthMiddleware = async (c: Context, next: Next) => {
     return c.json({ error: "Unauthorized" }, 401);
   }
 
-  return next();
-};
+  return await next();
+});
