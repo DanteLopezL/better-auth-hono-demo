@@ -16,4 +16,6 @@ WORKDIR /app
 
 COPY --from=builder /app/dist /app/dist
 
+EXPOSE 3000
+
 ENTRYPOINT [ "bun", "dist/main.js" ]

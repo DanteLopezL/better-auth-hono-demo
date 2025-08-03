@@ -1,7 +1,7 @@
 services:
   db:
     image: postgres:15.1
-    restart: always
+    restart: unless-stopped
     ports:
       - ${DB_PORT}:5432
     environment:
@@ -10,5 +10,15 @@ services:
       POSTGRES_DB: ${DB_NAME}
     volumes:
       - pgdata:/var/lib/postgresql/data
+
+  cache:
+    image: redis:8.0.3
+    restart: unless-stopped
+    ports:
+      - ${REDIS_PORT}:6379
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
+    command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
+
 volumes:
   pgdata:
