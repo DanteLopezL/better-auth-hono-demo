@@ -5,11 +5,15 @@ import { openAPI, bearer, jwt } from "better-auth/plugins";
 
 export const auth = betterAuth({
   trustedOrigins: ["http://localhost:5173"],
-  plugins: [openAPI(), bearer(), jwt()],
+  plugins: [openAPI(), bearer(), jwt({ jwt: { expirationTime: "24h" } })],
   database: drizzleAdapter(db, {
     provider: "pg",
     usePlural: true,
   }),
+  rateLimit: {
+    enabled: true,
+    storage: "secondary-storage",
+  },
   secondaryStorage: {
     get: async (key) => {
       const value = await redis.get(key);

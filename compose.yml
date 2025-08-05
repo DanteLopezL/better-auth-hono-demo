@@ -20,5 +20,15 @@ services:
       REDIS_PASSWORD: ${REDIS_PASSWORD}
     command: redis-server --appendonly yes --requirepass ${REDIS_PASSWORD}
 
+  pgadmin:
+    depends_on:
+      - db
+    image: dpage/pgadmin4:8
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=${PG_EMAIL}
+      - PGADMIN_DEFAULT_PASSWORD=${PG_PASSWORD}
+    ports:
+      - 80:80
+
 volumes:
   pgdata:
